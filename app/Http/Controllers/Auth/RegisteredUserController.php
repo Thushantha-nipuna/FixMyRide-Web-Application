@@ -24,31 +24,50 @@ class RegisteredUserController extends Controller
 
     /**
      * Handle an incoming registration request.
+     *
+     * @throws \Illuminate\Validation\ValidationException
      */
     public function store(Request $request): RedirectResponse
     {
+        // Log the request for debugging
+        \Log::info('REGISTER PAYLOAD: ' . json_encode($request->all()));
+
+        // Validate the request
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
-            'role' => ['required', 'string', 'in:customer,mechanic,seller'],
+            'role' => ['required', 'in:customer,mechanic,seller'], // Add role validation
         ]);
 
+        // Create the user
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
-            'role' => $request->role,
+            'role' => $request->role, // Save the role
         ]);
 
+        // Fire the registered event
+        event(new Registered($user));
+
+        // Log in the user
         Auth::login($user);
 
+        // Log the role for debugging
+        \Log::info('USER ROLE: ' . $user->role);
+
+        // Redirect based on role
         if ($user->role === 'mechanic') {
+            \Log::info('REDIRECTING TO: mechanic.form');
             return redirect()->route('mechanic.form');
         } elseif ($user->role === 'seller') {
+            \Log::info('REDIRECTING TO: seller.form');
             return redirect()->route('seller.form');
         }
 
+        // Default redirect for customers
+        \Log::info('REDIRECTING TO: home');
         return redirect()->route('home');
     }
 }

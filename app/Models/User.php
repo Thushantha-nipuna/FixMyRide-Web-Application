@@ -21,6 +21,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'role',
     ];
 
     /**
@@ -45,4 +46,18 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function mechanic()
+{
+    return $this->hasOne(Mechanic::class);
+}
+// user job relation
+public function jobRequests()
+{
+    return $this->hasMany(JobRequest::class, 'customer_id');
+}
+public function seller()
+{
+    return $this->hasOne(Seller::class);
+}
 }

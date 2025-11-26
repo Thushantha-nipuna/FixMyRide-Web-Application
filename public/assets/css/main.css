@@ -3335,7 +3335,7 @@ span {
 .item-bg-color {
   background-color: #f4f6fa !important;
 }
-
+/*
 .hero-1 {
   padding: 190px 0 150px;
   position: relative;
@@ -4188,7 +4188,7 @@ span {
 .hero-4-container .hero-4-right-content .hero-4-slider-navigation div.active {
   background: var(--white);
 }
-
+*/
 .mean-container a.meanmenu-reveal {
   display: none;
 }

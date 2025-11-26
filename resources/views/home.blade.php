@@ -45,7 +45,316 @@
 
 <!-- Leaflet CSS -->
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+<style>
+    body { margin: 0; padding: 0; font-family: Arial, sans-serif; }
+    /* Modern Hero Styles */
+.hero-section {
+    position: relative;
+    overflow: hidden;
+    min-height: 600px;
+}
 
+.hero-slide-1 { background: #ffffff; }
+.hero-slide-2 {  background: #ffffff; }
+.hero-slide-3 {  background: #ffffff; }
+
+.hero-content h1 {
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 800;
+    margin-bottom: 1.5rem;
+    line-height: 1.2;
+}
+
+.hero-content p {
+    font-size: clamp(1rem, 2vw, 1.2rem);
+    line-height: 1.8;
+    margin-bottom: 2rem;
+}
+
+.theme-btn {
+    background: linear-gradient(135deg, #ffb4b4 0%, #f16868 100%);
+    padding: 15px 35px;
+    border-radius: 50px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(255, 255, 255, 0.3);
+}
+
+.theme-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 25px rgba(255, 255, 255, 0.5);
+}
+
+/* Modern Card Styles */
+.car-box-items, .feature-box-items, .news-box-items {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.car-box-items:hover, .feature-box-items:hover, .news-box-items:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+}
+
+/* Glass-morphism Effect */
+.about-content, .section-title-area {
+    backdrop-filter: blur(10px);
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    padding: 30px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .hero-content h1 { font-size: 2rem; }
+    .hero-section { min-height: 500px; }
+}
+    
+    .map-section {
+        position: relative;
+        padding: 0;
+        margin: 0;
+        height: 600px;
+    }
+    
+    #map { 
+        height: 600px;
+        width: 100%; 
+        position: relative;
+    }
+    
+    .mechanic-popup h3 { margin: 0 0 10px 0; color: #141518; }
+    .mechanic-popup p { margin: 5px 0; font-size: 14px; }
+    .mechanic-popup img { width: 60px; height: 60px; border-radius: 50%; object-fit: cover; margin-bottom: 10px; }
+    
+    /* SOS Button Styles */
+    .sos-button {
+        position: absolute;
+        bottom: 30px;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 999;
+        background: linear-gradient(135deg, #ff0844 0%, #ff3b69 100%);
+        color: white;
+        border: none;
+        padding: 18px 40px;
+        border-radius: 50px;
+        font-size: 18px;
+        font-weight: 700;
+        cursor: pointer;
+        box-shadow: 0 8px 30px rgba(255, 8, 68, 0.4);
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        animation: sosPulse 2s infinite;
+        transition: all 0.3s ease;
+    }
+
+    .sos-button:hover {
+        transform: translateX(-50%) translateY(-5px);
+        box-shadow: 0 12px 40px rgba(255, 8, 68, 0.6);
+    }
+
+    @keyframes sosPulse {
+        0%, 100% { box-shadow: 0 8px 30px rgba(255, 8, 68, 0.4); }
+        50% { box-shadow: 0 8px 50px rgba(255, 8, 68, 0.8); }
+    }
+
+    /* Modal Styles */
+    .sos-modal {
+        display: none;
+        position: fixed;
+        z-index: 10000;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.8);
+        animation: fadeIn 0.3s ease;
+    }
+
+    .sos-modal-content {
+        position: relative;
+        background: white;
+        margin: 5% auto 5% auto;
+        padding: 0;
+        width: 90%;
+        max-width: 600px;
+        max-height: 85vh;
+        border-radius: 20px;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        animation: slideDown 0.3s ease;
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+
+    @keyframes slideDown {
+        from { transform: translateY(-50px); opacity: 0; }
+        to { transform: translateY(0); opacity: 1; }
+    }
+
+    .sos-modal-header {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: 25px 30px;
+        border-radius: 20px 20px 0 0;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .sos-modal-header h2 {
+        margin: 0;
+        font-size: 24px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .sos-close {
+        background: none;
+        border: none;
+        color: white;
+        font-size: 32px;
+        cursor: pointer;
+        line-height: 1;
+    }
+
+    .sos-modal-body {
+        padding: 30px;
+        overflow-y: auto;
+        overflow-x: hidden;
+        flex: 1;
+    }
+
+    .sos-step {
+        display: none;
+    }
+
+    .sos-step.active {
+        display: block;
+    }
+
+    .problem-types {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        gap: 15px;
+        margin: 20px 0;
+    }
+
+    .problem-option {
+        position: relative;
+        cursor: pointer;
+    }
+
+    .problem-option input[type="radio"] {
+        position: absolute;
+        opacity: 0;
+    }
+
+    .problem-option span {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 15px 20px;
+        background: #f8f9fa;
+        border: 2px solid #e0e0e0;
+        border-radius: 12px;
+        transition: all 0.3s ease;
+        font-weight: 600;
+    }
+
+    .problem-option input[type="radio"]:checked + span {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        border-color: #667eea;
+    }
+
+    .problem-option:hover span {
+        border-color: #667eea;
+        transform: translateY(-2px);
+    }
+
+    .sos-btn-primary, .sos-btn-secondary {
+        width: 100%;
+        padding: 15px;
+        border: none;
+        border-radius: 12px;
+        font-size: 16px;
+        font-weight: 700;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        margin-top: 15px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+    }
+
+    .sos-btn-primary {
+        background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        color: white;
+    }
+
+    .sos-btn-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 20px rgba(245, 87, 108, 0.4);
+    }
+
+    .sos-btn-secondary {
+        background: #6c757d;
+        color: white;
+    }
+
+    .mechanics-list {
+        max-height: 400px;
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
+
+    .mechanic-card {
+        background: #f8f9fa;
+        border: 2px solid #e0e0e0;
+        border-radius: 12px;
+        padding: 20px;
+        margin-bottom: 15px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+    .mechanic-card:hover {
+        border-color: #667eea;
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .mechanic-card h4 {
+        margin: 0 0 10px 0;
+        color: #2c3e50;
+    }
+
+    .mechanic-info {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        color: #7f8c8d;
+        font-size: 14px;
+    }
+
+    .loading {
+        text-align: center;
+        padding: 40px;
+        color: #667eea;
+        font-size: 18px;
+    }
+</style>
 
   </head>
   <body>
@@ -188,7 +497,7 @@
             <div class="navbar-2-left">
               <div class="navbar-2-logo">
                 <a href="index-4.html">
-                  <img src="assets/img/logo/black-logo.svg" alt="RevAuto" />
+                  <img src="assets/img/logo/black-logo.svg" alt="fixmyride" />
                 </a>
               </div>
             </div>
@@ -201,109 +510,7 @@
                 <div class="main-menu">
                   <nav id="mobile-menu">
                     <ul>
-                      <li class="has-dropdown active menu-thumb">
-                        <a href="index.html"> Home </a>
-                        <ul class="submenu has-homemenu">
-                          <li>
-                            <div class="row g-4 homemenu-items">
-                              <div class="col-lg-3">
-                                <div class="homemenu">
-                                  <div class="homemenu-thumb">
-                                    <a href="index.html">
-                                      <img
-                                        src="assets/img/header/home-1.jpg"
-                                        alt="img"
-                                      />
-                                    </a>
-                                  </div>
-                                  <h4 class="homemenu-title">
-                                    <a href="index.html">Home Page 01</a>
-                                  </h4>
-                                </div>
-                              </div>
-                              <div class="col-lg-3">
-                                <div class="homemenu">
-                                  <div class="homemenu-thumb">
-                                    <a href="index-2.html">
-                                      <img
-                                        src="assets/img/header/home-2.jpg"
-                                        alt="img"
-                                      />
-                                    </a>
-                                  </div>
-                                  <h4 class="homemenu-title">
-                                    <a href="index-2.html">Home Page 02</a>
-                                  </h4>
-                                </div>
-                              </div>
-                              <div class="col-lg-3">
-                                <div class="homemenu">
-                                  <div class="homemenu-thumb">
-                                    <a href="index-3.html">
-                                      <img
-                                        src="assets/img/header/home-5.png"
-                                        alt="img"
-                                      />
-                                    </a>
-                                  </div>
-                                  <h4 class="homemenu-title">
-                                    <a href="index-3.html">Home Page 03</a>
-                                  </h4>
-                                </div>
-                              </div>
-                              <div class="col-lg-3">
-                                <div class="homemenu">
-                                  <div class="homemenu-thumb">
-                                    <a href="index-4.html">
-                                      <img
-                                        src="assets/img/header/home-6.png"
-                                        alt="img"
-                                      />
-                                    </a>
-                                  </div>
-                                  <h4 class="homemenu-title">
-                                    <a href="index-4.html">Home Page 04</a>
-                                  </h4>
-                                </div>
-                              </div>
-                              <div class="col-lg-3">
-                                <div class="homemenu">
-                                  <div class="homemenu-thumb">
-                                    <a href="home-landing.html">
-                                      <img
-                                        src="assets/img/header/home-3.jpg"
-                                        alt="img"
-                                      />
-                                    </a>
-                                  </div>
-                                  <h4 class="homemenu-title">
-                                    <a href="home-landing.html"
-                                      >Car Accessories 01</a
-                                    >
-                                  </h4>
-                                </div>
-                              </div>
-                              <div class="col-lg-3">
-                                <div class="homemenu">
-                                  <div class="homemenu-thumb">
-                                    <a href="home-landing-2.html">
-                                      <img
-                                        src="assets/img/header/home-4.jpg"
-                                        alt="img"
-                                      />
-                                    </a>
-                                  </div>
-                                  <h4 class="homemenu-title">
-                                    <a href="home-landing-2.html"
-                                      >Car Accessories 02</a
-                                    >
-                                  </h4>
-                                </div>
-                              </div>
-                            </div>
-                          </li>
-                        </ul>
-                      </li>
+                      
                       <li class="has-dropdown active d-xl-none">
                         <a href="team.html" class="border-none"> Home </a>
                         <ul class="submenu">
@@ -392,25 +599,7 @@
 
                         </ul>
                       </li>
-                      <li>
-                        <a href="shop-details.html"> Shop </a>
-                        <ul class="submenu">
-                          <li><a href="shop.html">Shop</a></li>
-                          <li>
-                            <a href="shop-right-sidebar.html"
-                              >Shop Right Sidebar</a
-                            >
-                          </li>
-                          <li>
-                            <a href="shop-left-sidebar.html"
-                              >Shop Left Sidebar</a
-                            >
-                          </li>
-                          <li><a href="shop-cart.html">Shop Cart</a></li>
-                          <li><a href="shop-details.html">Shop Details</a></li>
-                          <li><a href="checkout.html">Checkout</a></li>
-                        </ul>
-                      </li>
+                      
                      
                     </ul>
                   </nav>
@@ -444,20 +633,31 @@
                   </form>
                 </div>
 
-                <div class="buttons">
-                  <a href="shop-cart.html" class="cart-button" data-count="10">
-                    <i class="fa-sharp fa-regular fa-bag-shopping"></i>
-                    <span id="cart-count">0</span>
-                  </a>
-                  
-
-                  <div class="header__hamburger d-xl-none my-auto">
-                    <div class="sidebar__toggle">
-                      <i class="fas fa-bars"></i>
-                    </div>
-                  </div>
-                </div>
+                
               </div>
+              @guest
+    <!-- Guest users see Login/Register -->
+    <li><a href="{{ route('login') }}">Log In</a></li>
+    <li><a href="{{ route('register') }}">Register</a></li>
+@else
+    <!-- Logged-in users see role-specific links -->
+    @if(Auth::user()->role === 'mechanic')
+        <li><a href="{{ route('mechanic.dashboard') }}">My Dashboard</a></li>
+        <li><a href="{{ route('mechanic.jobs') }}">View Job Requests</a></li>
+    @elseif(Auth::user()->role === 'customer')
+        <li><a href="{{ route('customer.jobs') }}">My Requests</a></li>
+    @endif
+    
+    <li><a href="{{ route('profile.edit') }}">My Profile</a></li>
+    <li>
+        <form method="POST" action="{{ route('logout') }}">
+            @csrf
+            <button type="submit" style="background: none; border: none; color: inherit; cursor: pointer;">
+                Logout
+            </button>
+        </form>
+    </li>
+@endguest
             </div>
           </div>
         </div>
@@ -477,11 +677,11 @@
         @elseif(Auth::user()->role === 'seller')
             <p>Manage your spare parts listings here.</p>
         @endif
-
+<!--
         <form method="POST" action="{{ route('logout') }}">
             @csrf
             <button type="submit" class="btn btn-danger">Logout</button>
-        </form>
+        </form>-->
     @else
         {{-- Breeze login form --}}
         
@@ -499,132 +699,102 @@
       </div>
       <div class="container">
         <div class="swiper hero-slider">
-          <div class="swiper-wrapper">
-            <div class="swiper-slide">
-              <div class="row g-4 align-items-center">
-                <div class="col-lg-5">
-                  <div class="hero-content">
-                    
-                    <h1>
-                      Need help on the road?
-                    </h1>
-                    <p>
-                      Easily locate trusted mechanics in your area using our interactive map. Get real-time directions, view garage details, and request services — all in one place.
-                    </p>
-                    <div class="hero-button">
-                      <a href="car-details.html" class="theme-btn hover-white"
-                        >Explore More
-                        <i class="fa-sharp fa-regular fa-arrow-right"></i
-                      ></a>
-                      
+    <div class="swiper-wrapper">
+        
+        <!-- Slide 1: Find Mechanics -->
+        <div class="swiper-slide hero-slide-1">
+            <div class="row g-4 align-items-center">
+                <div class="col-lg-6">
+                    <div class="hero-content text-white">
+                        <span class="badge bg-light text-dark mb-3 px-4 py-2 rounded-pill">🚗 Welcome to FixMyRide</span>
+                        <h1 class="animate__animated animate__fadeInUp">
+                            Find Trusted Mechanics<br/>
+                            <span style="color: #292925;">Near You Instantly</span>
+                        </h1>
+                        <p class="animate__animated animate__fadeInUp animate__delay-1s;" style="color:#565654;">
+                            Use our interactive map to locate verified mechanics in your area. Get real-time directions, view ratings, and book services—all in one place.
+                        </p>
+                        <div class="hero-button animate__animated animate__fadeInUp animate__delay-2s">
+                            <a href="#map" class="theme-btn hover-white">
+                                Find Mechanics Now
+                                <i class="fa-solid fa-location-dot"></i>
+                            </a>
+                        </div>
                     </div>
-                    <div class="review-items">
-                      
-                    <!--  <div class="content">
-                        <h2><span class="count">1.5</span>k</h2>
-                        <p>Good Reviews</p>
-                      </div>-->
-                    </div>
-                  </div>
                 </div>
-                <div class="col-lg-7">
-                  <div class="hero-image-items">
-                    <div class="hero-image">
-                      <img src="assets/img/hero/hero-car-1.png" alt="img" />
+                <div class="col-lg-6">
+                    <div class="hero-image-items animate__animated animate__fadeInRight">
+                        <img src="assets/img/hero/hero-car-1.png" alt="Find Mechanics" style="max-width: 100%; height: auto;"/>
                     </div>
-                   <!-- <div class="bg-shape">
-                      <img src="assets/img/hero/car-shape.png" alt="img" />
-                    </div>-->
-                  </div>
                 </div>
-              </div>
             </div>
-         <!--   <div class="swiper-slide">
-              <div class="row g-4 align-items-center">
-                <div class="col-lg-5">
-                  <div class="hero-content">
-                    
-                    <h1>
-                      Explore The Next Generation <br />
-                      Of Cars 2
-                    </h1>
-                    <p>
-                      Discover cutting-edge innovation and exceptional
-                      performance the latest models crafted for tomorrow’s
-                      roadways.
-                    </p>
-                    <div class="hero-button">
-                      <a href="car-details.html" class="theme-btn hover-white"
-                        >Buy This Car
-                        <i class="fa-sharp fa-regular fa-arrow-right"></i
-                      ></a>
-                      <a href="about.html" class="link-btn">Explore More</a>
-                    </div>
-                    <div class="review-items">
-                      <img src="assets/img/hero/client.png" alt="img" />
-                      <div class="content">
-                        <h2><span class="count">1.5</span>k</h2>
-                        <p>Good Reviews</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-lg-7">
-                  <div class="hero-image-items">
-                    <div class="hero-image">
-                      <img src="assets/img/hero/hero-car-1.png" alt="img" />
-                    </div>
-                    <div class="bg-shape">
-                      <img src="assets/img/hero/car-shape.png" alt="img" />
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="swiper-slide">
-              <div class="row g-4 align-items-center">
-                <div class="col-lg-5">
-                  <div class="hero-content">
-                    
-                    <h1>
-                      Explore The Next Generation <br />
-                      Of Cars 3
-                    </h1>
-                    <p>
-                      Discover cutting-edge innovation and exceptional
-                      performance the latest models crafted for tomorrow’s
-                      roadways.
-                    </p>
-                    <div class="hero-button">
-                      <a href="car-details.html" class="theme-btn hover-white"
-                        >Buy This Car
-                        <i class="fa-sharp fa-regular fa-arrow-right"></i
-                      ></a>
-                      <a href="about.html" class="link-btn">Explore More</a>
-                    </div>
-                    <div class="review-items">
-                      <img src="assets/img/hero/client.png" alt="img" />
-                      <div class="content">
-                        <h2><span class="count">1.5</span>k</h2>
-                        <p>Good Reviews</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-lg-7">
-                  <div class="hero-image-items">
-                    <div class="hero-image">
-                      <img src="assets/img/hero/hero-car-1.png" alt="img" />
-                    </div>
-                    <div class="bg-shape">
-                      <img src="assets/img/hero/car-shape.png" alt="img" />
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div> -->
-          </div>
         </div>
+        
+        <!-- Slide 2: Emergency SOS -->
+        <div class="swiper-slide hero-slide-2">
+            <div class="row g-4 align-items-center">
+                <div class="col-lg-6">
+                    <div class="hero-content text-white">
+                        <span class="badge bg-light text-danger mb-3 px-4 py-2 rounded-pill">🚨 Emergency Assistance</span>
+                        <h1 class="animate__animated animate__fadeInUp">
+                            Stuck on the Road?<br/>
+                            <span style="color: #323130;">Help is One Click Away</span>
+                        </h1>
+                        <p class="animate__animated animate__fadeInUp animate__delay-1s;" style="color:#565654;">
+                            Our Emergency SOS feature connects you with the nearest available mechanic instantly. Get help when you need it most—24/7 support.
+                        </p>
+                        <div class="hero-button animate__animated animate__fadeInUp animate__delay-2s">
+                            <a href="#map" class="theme-btn" style="background: #ff0844;">
+                                Emergency SOS
+                                <i class="fa-solid fa-triangle-exclamation"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="hero-image-items animate__animated animate__fadeInRight">
+                        <img src="assets/img/hero/hero-car-1.png" alt="Emergency SOS" style="max-width: 100%; height: auto; filter: drop-shadow(0 10px 30px rgba(255,8,68,0.5));"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Slide 3: Spare Parts -->
+        <div class="swiper-slide hero-slide-3">
+            <div class="row g-4 align-items-center">
+                <div class="col-lg-6">
+                    <div class="hero-content text-white">
+                        <span class="badge bg-light text-primary mb-3 px-4 py-2 rounded-pill">🔧 Quality Parts</span>
+                        <h1 class="animate__animated animate__fadeInUp">
+                            Find Spare Parts<br/>
+                            <span style="color: #2f3232;">From Trusted Sellers</span>
+                        </h1>
+                        <p class="animate__animated animate__fadeInUp animate__delay-1s;" style="color:#565654;">
+                            Browse genuine spare parts from verified sellers near you. Compare prices, check availability, and order directly—quick and hassle-free.
+                        </p>
+                        <div class="hero-button animate__animated animate__fadeInUp animate__delay-2s">
+                            <a href="#" class="theme-btn" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">
+                                Browse Parts
+                                <i class="fa-solid fa-gear"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="hero-image-items animate__animated animate__fadeInRight">
+                        <img src="assets/img/hero/hero-car-1.png" alt="Spare Parts" style="max-width: 100%; height: auto;"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+    
+    <!-- Add Pagination & Navigation -->
+    <div class="swiper-pagination"></div>
+    <div class="swiper-button-next"></div>
+    <div class="swiper-button-prev"></div>
+</div>
       </div>
     </section>
 
@@ -1507,42 +1677,353 @@
           </div>
         </div>
       </div>
-      <div id="map" style="height: 500px;"></div>
+    <!-- SOS Button and Map Section -->
+<section class="map-section">
+    <div id="map"></div>
+    
+    <!-- SOS Button -->
+    <button id="sosButton" class="sos-button">
+        <i class="fa-solid fa-triangle-exclamation"></i>
+        <span>EMERGENCY SOS</span>
+    </button>
+</section>
+
+<!-- SOS Modal -->
+<div id="sosModal" class="sos-modal">
+    <div class="sos-modal-content">
+        <div class="sos-modal-header">
+            <h2><i class="fa-solid fa-car-burst"></i> Emergency Assistance</h2>
+            <button class="sos-close">&times;</button>
+        </div>
+        
+        <div class="sos-modal-body">
+            <div id="step1" class="sos-step active">
+                <h3>What's the problem?</h3>
+                <div class="problem-types">
+                    <label class="problem-option">
+                        <input type="radio" name="problem_type" value="Engine Problem">
+                        <span><i class="fa-solid fa-engine"></i> Engine Problem</span>
+                    </label>
+                    <label class="problem-option">
+                        <input type="radio" name="problem_type" value="Flat Tire">
+                        <span><i class="fa-solid fa-circle"></i> Flat Tire</span>
+                    </label>
+                    <label class="problem-option">
+                        <input type="radio" name="problem_type" value="Battery Dead">
+                        <span><i class="fa-solid fa-car-battery"></i> Battery Dead</span>
+                    </label>
+                    <label class="problem-option">
+                        <input type="radio" name="problem_type" value="Brake Problem">
+                        <span><i class="fa-solid fa-brake-warning"></i> Brake Problem</span>
+                    </label>
+                    <label class="problem-option">
+                        <input type="radio" name="problem_type" value="Overheating">
+                        <span><i class="fa-solid fa-temperature-high"></i> Overheating</span>
+                    </label>
+                    <label class="problem-option">
+                        <input type="radio" name="problem_type" value="Electrical Issue">
+                        <span><i class="fa-solid fa-bolt"></i> Electrical Issue</span>
+                    </label>
+                    <label class="problem-option">
+                        <input type="radio" name="problem_type" value="Transmission Problem">
+                        <span><i class="fa-solid fa-gears"></i> Transmission Problem</span>
+                    </label>
+                    <label class="problem-option">
+                        <input type="radio" name="problem_type" value="Accident">
+                        <span><i class="fa-solid fa-car-crash"></i> Accident</span>
+                    </label>
+                    <label class="problem-option">
+                        <input type="radio" name="problem_type" value="Other">
+                        <span><i class="fa-solid fa-wrench"></i> Other</span>
+                    </label>
+                </div>
+                
+                <div class="form-group mt-3">
+                    <label>Additional Notes (Optional)</label>
+                    <textarea id="additionalNotes" class="form-control" rows="3" placeholder="Describe your situation..."></textarea>
+                </div>
+                
+                <button id="findMechanicsBtn" class="sos-btn-primary">
+                    <i class="fa-solid fa-search"></i> Find Nearby Mechanics
+                </button>
+            </div>
+            
+            <div id="step2" class="sos-step">
+                <h3>Select a Mechanic</h3>
+                <div id="mechanicsList" class="mechanics-list">
+                    <div class="loading">
+                        <i class="fa-solid fa-spinner fa-spin"></i> Finding mechanics near you...
+                    </div>
+                </div>
+                <button id="backToStep1" class="sos-btn-secondary">
+                    <i class="fa-solid fa-arrow-left"></i> Back
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Map Initialization Script -->
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
-    if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(function(position) {
-            var userLat = position.coords.latitude;
-            var userLng = position.coords.longitude;
+    // Initialize map centered on Sri Lanka
+const map = L.map('map').setView([7.8731, 80.7718], 8);
 
-            // Initialize map
-            var map = L.map('map').setView([userLat, userLng], 13);
+// Add OpenStreetMap tiles
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '© OpenStreetMap contributors',
+    maxZoom: 19
+}).addTo(map);
 
-            // Add OpenStreetMap layer
-            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                attribution: '© OpenStreetMap contributors'
+// Custom mechanic icon
+const mechanicIcon = L.icon({
+    iconUrl: 'https://cdn-icons-png.flaticon.com/512/3448/3448339.png',
+    iconSize: [40, 40],
+    iconAnchor: [20, 40],
+    popupAnchor: [0, -40]
+});
+
+// Custom seller icon
+const sellerIcon = L.icon({
+    iconUrl: 'https://cdn-icons-png.flaticon.com/512/2331/2331966.png',
+    iconSize: [40, 40],
+    iconAnchor: [20, 40],
+    popupAnchor: [0, -40]
+});
+
+// Fetch and display mechanics
+fetch('/api/mechanics')
+    .then(response => response.json())
+    .then(mechanics => {
+        mechanics.forEach(mechanic => {
+            const marker = L.marker([mechanic.latitude, mechanic.longitude], {
+                icon: mechanicIcon
             }).addTo(map);
 
-            // Add user location marker
-            L.marker([userLat, userLng]).addTo(map)
-                .bindPopup("You are here")
-                .openPopup();
+            const popupContent = `
+                <div class="mechanic-popup">
+                    ${mechanic.photo ? `<img src="${mechanic.photo}" alt="${mechanic.full_name}">` : ''}
+                    <h3>🔧 ${mechanic.garage_name}</h3>
+                    <p><strong>Owner:</strong> ${mechanic.full_name}</p>
+                    <p><strong>Specialty:</strong> ${mechanic.specialty}</p>
+                    <p><strong>Available:</strong> ${mechanic.available_time}</p>
+                    <p><strong>Phone:</strong> <a href="tel:${mechanic.phone_number}">${mechanic.phone_number}</a></p>
+                </div>
+            `;
 
-            // ✅ Add mechanic markers from Laravel
-            const mechanics = @json($mechanics);
-
-            mechanics.forEach(function(mechanic) {
-                L.marker([mechanic.latitude, mechanic.longitude]).addTo(map)
-                    .bindPopup(mechanic.name);
-            });
-
+            marker.bindPopup(popupContent);
         });
-    } else {
-        alert("Geolocation is not supported by this browser.");
-    }
+
+        console.log(`Loaded ${mechanics.length} mechanics on the map`);
+    })
+    .catch(error => {
+        console.error('Error loading mechanics:', error);
+    });
+
+// Fetch and display sellers
+fetch('/api/sellers')
+    .then(response => response.json())
+    .then(sellers => {
+        sellers.forEach(seller => {
+            const marker = L.marker([seller.latitude, seller.longitude], {
+                icon: sellerIcon
+            }).addTo(map);
+
+            const popupContent = `
+                <div class="mechanic-popup">
+                    ${seller.photo ? `<img src="${seller.photo}" alt="${seller.full_name}">` : ''}
+                    <h3>🛒 ${seller.shop_name}</h3>
+                    <p><strong>Owner:</strong> ${seller.full_name}</p>
+                    <p><strong>Category:</strong> ${seller.parts_category}</p>
+                    <p><strong>Available:</strong> ${seller.available_time}</p>
+                    <p><strong>Phone:</strong> <a href="tel:${seller.phone_number}">${seller.phone_number}</a></p>
+                </div>
+            `;
+
+            marker.bindPopup(popupContent);
+        });
+
+        console.log(`Loaded ${sellers.length} sellers on the map`);
+    })
+    .catch(error => {
+        console.error('Error loading sellers:', error);
+    });
+
+// Add user's current location
+if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(position => {
+        const userIcon = L.icon({
+            iconUrl: 'https://cdn-icons-png.flaticon.com/512/684/684908.png',
+            iconSize: [30, 30]
+        });
+
+        L.marker([position.coords.latitude, position.coords.longitude], {
+            icon: userIcon
+        }).addTo(map).bindPopup('📍 You are here');
+
+        map.setView([position.coords.latitude, position.coords.longitude], 12);
+    });
+}
 </script>
 
+<!-- SOS Button Functionality -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const sosButton = document.getElementById('sosButton');
+    const sosModal = document.getElementById('sosModal');
+    const closeModal = document.querySelector('.sos-close');
+    const findMechanicsBtn = document.getElementById('findMechanicsBtn');
+    const backToStep1 = document.getElementById('backToStep1');
+    
+    let userLocation = null;
+
+    // Open SOS Modal
+    sosButton.addEventListener('click', function() {
+        @guest
+            // Redirect to login if not authenticated
+            window.location.href = '{{ route('login') }}';
+        @else
+            // Get user location
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(function(position) {
+                    userLocation = {
+                        lat: position.coords.latitude,
+                        lng: position.coords.longitude
+                    };
+                    sosModal.style.display = 'block';
+                }, function(error) {
+                    alert('Please enable location services to use emergency assistance.');
+                });
+            } else {
+                alert('Geolocation is not supported by your browser.');
+            }
+        @endguest
+    });
+
+    // Close modal
+    closeModal.addEventListener('click', function() {
+        sosModal.style.display = 'none';
+        resetModal();
+    });
+
+    // Close on outside click
+    window.addEventListener('click', function(event) {
+        if (event.target === sosModal) {
+            sosModal.style.display = 'none';
+            resetModal();
+        }
+    });
+
+    // Find mechanics
+    findMechanicsBtn.addEventListener('click', function() {
+        const problemType = document.querySelector('input[name="problem_type"]:checked');
+        
+        if (!problemType) {
+            alert('Please select a problem type');
+            return;
+        }
+
+        // Show step 2
+        document.getElementById('step1').classList.remove('active');
+        document.getElementById('step2').classList.add('active');
+
+        // Fetch nearby mechanics
+        fetch(`/jobs/nearby-mechanics?latitude=${userLocation.lat}&longitude=${userLocation.lng}`, {
+            headers: {
+                'X-CSRF-TOKEN': '{{ csrf_token() }}'
+            }
+        })
+        .then(response => response.json())
+        .then(mechanics => {
+            displayMechanics(mechanics);
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            document.getElementById('mechanicsList').innerHTML = '<p class="text-danger">Error loading mechanics. Please try again.</p>';
+        });
+    });
+
+    // Display mechanics
+    function displayMechanics(mechanics) {
+        const mechanicsList = document.getElementById('mechanicsList');
+        
+        if (mechanics.length === 0) {
+            mechanicsList.innerHTML = '<p class="text-center">No mechanics found nearby. Try expanding your search radius.</p>';
+            return;
+        }
+
+        mechanicsList.innerHTML = mechanics.map(mechanic => `
+            <div class="mechanic-card" onclick="selectMechanic(${mechanic.id})">
+                <h4><i class="fa-solid fa-wrench"></i> ${mechanic.garage_name}</h4>
+                <div class="mechanic-info">
+                    <span><i class="fa-solid fa-user"></i> ${mechanic.full_name}</span>
+                    <span><i class="fa-solid fa-tools"></i> ${mechanic.specialty}</span>
+                    <span><i class="fa-solid fa-phone"></i> ${mechanic.phone_number}</span>
+                    <span><i class="fa-solid fa-location-dot"></i> ${mechanic.distance} km away</span>
+                    <span><i class="fa-solid fa-clock"></i> ${mechanic.available_time}</span>
+                </div>
+            </div>
+        `).join('');
+    }
+
+    // Back to step 1
+    backToStep1.addEventListener('click', function() {
+        document.getElementById('step2').classList.remove('active');
+        document.getElementById('step1').classList.add('active');
+    });
+
+    // Reset modal
+    function resetModal() {
+        document.getElementById('step1').classList.add('active');
+        document.getElementById('step2').classList.remove('active');
+        document.querySelectorAll('input[name="problem_type"]').forEach(input => input.checked = false);
+        document.getElementById('additionalNotes').value = '';
+    }
+});
+
+// Select mechanic and send request
+function selectMechanic(mechanicId) {
+    const problemType = document.querySelector('input[name="problem_type"]:checked').value;
+    const additionalNotes = document.getElementById('additionalNotes').value;
+    
+    if (!confirm('Send emergency request to this mechanic?')) {
+        return;
+    }
+
+    // Get user location
+    navigator.geolocation.getCurrentPosition(function(position) {
+        fetch('/jobs/request', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-TOKEN': '{{ csrf_token() }}'
+            },
+            body: JSON.stringify({
+                mechanic_id: mechanicId,
+                problem_type: problemType,
+                additional_notes: additionalNotes,
+                customer_latitude: position.coords.latitude,
+                customer_longitude: position.coords.longitude
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                alert('✅ Emergency request sent successfully! The mechanic will contact you soon.');
+                document.getElementById('sosModal').style.display = 'none';
+                location.reload();
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('Failed to send request. Please try again.');
+        });
+    });
+}
+</script>
 
     </section>
+
 
     <!-- Footer section started -->
     <footer class="footer-3">
@@ -1756,8 +2237,192 @@
     <script src="assets/js/wow.min.js"></script>
     <!--<< Main.js >>-->
     <script src="assets/js/main.js"></script>
+    
     <!-- Leaflet JS -->
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+ 
+<!--chatbot part-->
+
+<!-- Inline CSS jst fn-->
+<style>
+    #chatbot-container {
+        position: fixed;
+        bottom: 20px;
+        left: 20px;
+        z-index: 9998;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    }
+
+    .chatbot-toggle {
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        border: none;
+        box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        transition: all 0.3s ease;
+        position: relative;
+        animation: chatbotPulse 2s infinite;
+    }
+
+    @keyframes chatbotPulse {
+        0%, 100% { box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4); }
+        50% { box-shadow: 0 4px 20px rgba(102, 126, 234, 0.6); }
+    }
+
+    .chatbot-toggle:hover {
+        transform: scale(1.1);
+        box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+    }
+
+    .chatbot-toggle:active {
+        transform: scale(0.95);
+    }
+
+    .chatbot-toggle.active {
+        background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    }
+
+    .chatbot-notification {
+        position: absolute;
+        top: -5px;
+        right: -5px;
+        background: #ff4444;
+        color: white;
+        border-radius: 50%;
+        width: 24px;
+        height: 24px;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        font-size: 12px;
+        font-weight: bold;
+    }
+
+    .chatbot-notification.show {
+        display: flex;
+    }
+</style>
+
+<!-- Chatbot HTML -->
+<div id="chatbot-container">
+    <!-- Floating Chat Button -->
+    <button id="chatbot-toggle" class="chatbot-toggle" aria-label="Open chat" title="Chat with AI Assistant">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+        </svg>
+        <span class="chatbot-notification" id="chatbot-notification"></span>
+    </button>
+
+    <!-- Chat Window -->
+    <div id="chatbot-window" class="chatbot-window">
+        <!-- Header -->
+        <div class="chatbot-header">
+            <div class="chatbot-header-info">
+                <div class="chatbot-avatar">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <path d="M8 14s1.5 2 4 2 4-2 4-2"></path>
+                        <line x1="9" y1="9" x2="9.01" y2="9"></line>
+                        <line x1="15" y1="9" x2="15.01" y2="9"></line>
+                    </svg>
+                </div>
+                <div>
+                    <h3 class="chatbot-title">FixMyRide Assistant</h3>
+                    <p class="chatbot-status">
+                        <span class="status-dot"></span>
+                        Online
+                    </p>
+                </div>
+            </div>
+            <div class="chatbot-actions">
+                <button id="chatbot-clear" class="chatbot-action-btn" title="Clear chat history">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="3 6 5 6 21 6"></polyline>
+                        <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                    </svg>
+                </button>
+                <button id="chatbot-minimize" class="chatbot-action-btn" title="Minimize chat">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- Messages Container -->
+        <div id="chatbot-messages" class="chatbot-messages">
+            <!-- Welcome message will be added by JS -->
+        </div>
+
+        <!-- Input Area -->
+        <div class="chatbot-input-container">
+            <form id="chatbot-form" class="chatbot-form">
+                <input 
+                    type="text" 
+                    id="chatbot-input" 
+                    class="chatbot-input" 
+                    placeholder="Ask me anything about FixMyRide..."
+                    autocomplete="off"
+                    maxlength="1000"
+                >
+                <button type="button" id="chatbot-mic" class="chatbot-mic-btn" title="Voice input (coming soon)" disabled>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path>
+                        <path d="M19 10v2a7 7 0 0 1-14 0v-2"></path>
+                        <line x1="12" y1="19" x2="12" y2="23"></line>
+                        <line x1="8" y1="23" x2="16" y2="23"></line>
+                    </svg>
+                </button>
+                <button type="submit" id="chatbot-send" class="chatbot-send-btn">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="22" y1="2" x2="11" y2="13"></line>
+                        <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                    </svg>
+                </button>
+            </form>
+            <div class="chatbot-footer-text">
+                Powered by Groq AI
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Load Complete CSS -->
+<link rel="stylesheet" href="{{ asset('assets/css/chatbot.css') }}">
+
+<!-- Chatbot Configuration -->
+<script>
+    window.chatbotConfig = {
+        csrfToken: '{{ csrf_token() }}',
+        messageRoute: '{{ route('chatbot.message') }}',
+        isAuthenticated: {{ auth()->check() ? 'true' : 'false' }},
+        userName: '{{ auth()->check() ? auth()->user()->name : "Guest" }}',
+        userRole: '{{ auth()->check() ? auth()->user()->role : "guest" }}'
+    };
+    console.log('✅ Chatbot initialized on home page');
+    console.log('Config:', window.chatbotConfig);
+</script>
+
+<!-- Load Chatbot JavaScript -->
+<script src="{{ asset('assets/js/chatbot.js') }}"></script>
+
+<!-- Debug: Verify chatbot loaded -->
+<script>
+    setTimeout(function() {
+        const container = document.getElementById('chatbot-container');
+        if (container) {
+            console.log('✅ Chatbot container found!');
+        } else {
+            console.error('❌ Chatbot container NOT found!');
+        }
+    }, 1000);
+</script>
 
   </body>
 </html>

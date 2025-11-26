@@ -24,12 +24,35 @@ class AuthenticatedSessionController extends Controller
      */
     public function store(LoginRequest $request): RedirectResponse
     {
-        $request->authenticate();
+    $request->authenticate();
+    $request->session()->regenerate();
 
-        $request->session()->regenerate();
+    $user = Auth::user();
+    \Log::info('User logged in: ' . $user->email . ' | Role: ' . $user->role);
 
-        return redirect()->intended(route('dashboard', absolute: false));
+    // Redirect based on role
+    if ($user->role === 'mechanic') {
+        $mechanic = \App\Models\Mechanic::where('user_id', $user->id)->first();
+        
+        if ($mechanic) {
+            \Log::info('Redirecting mechanic to dashboard');
+            return redirect()->route('mechanic.dashboard');
+        } else {
+            \Log::info('Redirecting mechanic to form');
+            return redirect()->route('mechanic.form');
+        }
+    } elseif ($user->role === 'seller') {
+        $seller = \App\Models\Seller::where('user_id', $user->id)->first();
+        
+        if ($seller) {
+            return redirect()->route('seller.dashboard');
+        } else {
+            return redirect()->route('seller.form');
+        }
     }
+
+    return redirect()->route('home');
+}
 
     /**
      * Destroy an authenticated session.

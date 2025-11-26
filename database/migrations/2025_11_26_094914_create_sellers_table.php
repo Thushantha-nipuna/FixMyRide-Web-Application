@@ -8,15 +8,15 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create('mechanics', function (Blueprint $table) {
+        Schema::create('sellers', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->string('full_name');
-            $table->string('garage_name');
+            $table->string('shop_name');
             $table->decimal('latitude', 10, 7);
             $table->decimal('longitude', 10, 7);
             $table->string('business_registration_number')->unique();
-            $table->string('specialty');
+            $table->string('parts_category'); // Engine Parts, Body Parts, Electrical, etc.
             $table->string('available_time');
             $table->string('phone_number');
             $table->string('photo')->nullable();
@@ -27,6 +27,6 @@ return new class extends Migration
 
     public function down(): void
     {
-        Schema::dropIfExists('mechanics');
+        Schema::dropIfExists('sellers');
     }
 };

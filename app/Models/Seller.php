@@ -5,18 +5,18 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Mechanic extends Model
+class Seller extends Model
 {
     use HasFactory;
 
     protected $fillable = [
         'user_id',
         'full_name',
-        'garage_name',
+        'shop_name',
         'latitude',
         'longitude',
         'business_registration_number',
-        'specialty',
+        'parts_category',
         'available_time',
         'phone_number',
         'photo',
@@ -34,9 +34,4 @@ class Mechanic extends Model
     {
         return $this->belongsTo(User::class);
     }
-    // relation btwn jobs
-public function jobRequests()
-{
-    return $this->hasMany(JobRequest::class);
-}
 }
