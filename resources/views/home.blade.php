@@ -421,11 +421,7 @@
                 </button>
               </div>
             </div>
-            <p class="text d-none d-xl-block">
-              Nullam dignissim, ante scelerisque the is euismod fermentum odio
-              sem semper the is erat, a feugiat leo urna eget eros. Duis Aenean
-              a imperdiet risus.
-            </p>
+            
             <div class="mobile-menu fix mb-3"></div>
             <div class="offcanvas__contact">
               <h4>Contact Info</h4>
@@ -436,7 +432,7 @@
                   </div>
                   <div class="offcanvas__contact-text">
                     <a target="_blank" href="#"
-                      >Main Street, Melbourne, Australia</a
+                      >Main Street, Kandy, Sri Lanka</a
                     >
                   </div>
                 </li>
@@ -447,7 +443,7 @@
                   <div class="offcanvas__contact-text">
                     <a href="mailto:info@example.com"
                       ><span class="mailto:info@example.com"
-                        >info@example.com</span
+                        >info@fixmyride.com</span
                       ></a
                     >
                   </div>
@@ -465,15 +461,11 @@
                     <i class="far fa-phone"></i>
                   </div>
                   <div class="offcanvas__contact-text">
-                    <a href="tel:+11002345909">+11002345909</a>
+                    <a href="tel:+11002345909">+94 662 2223 22</a>
                   </div>
                 </li>
               </ul>
-              <div class="header-button mt-4">
-                <a href="contact.html" class="theme-btn text-center">
-                  Get A Quote
-                </a>
-              </div>
+              
               <div class="social-icon d-flex align-items-center">
                 <a href="#"><i class="fab fa-facebook-f"></i></a>
                 <a href="#"><i class="fab fa-twitter"></i></a>
@@ -488,181 +480,151 @@
     <div class="offcanvas__overlay"></div>
 
     <!-- header  section start -->
-    <header id="header-sticky" class="navbar-2">
-      
-
-      <div class="container">
+    <!-- header section start -->
+<header id="header-sticky" class="navbar-2">
+    <div class="container">
         <div class="row justify-content-between align-items-center">
-          <div class="col-6 col-md-4">
-            <div class="navbar-2-left">
-              <div class="navbar-2-logo">
-                <a href="index-4.html">
-                  <img src="assets/img/logo/black-logo.svg" alt="fixmyride" />
-                </a>
-              </div>
-            </div>
-          </div>
-          <div class="col-6 col-md-7">
-            <div class="navbar-2-right">
-              <!-- right -->
-              <!-- general menu -->
-              <div class="mean__menu-wrapper">
-                <div class="main-menu">
-                  <nav id="mobile-menu">
-                    <ul>
-                      
-                      <li class="has-dropdown active d-xl-none">
-                        <a href="team.html" class="border-none"> Home </a>
-                        <ul class="submenu">
-                          <li><a href="index.html">Home Page 01</a></li>
-                          <li><a href="index-2.html">Home Page 02</a></li>
-                          <li>
-                            <a href="home-landing.html">Car Accessories 01</a>
-                          </li>
-                          <li>
-                            <a href="home-landing-2.html">Car Accessories 02</a>
-                          </li>
-                        </ul>
-                      </li>
-                      <li>
-                        <a href="about.html">About</a>
-                      </li>
-                      <li>
-                        <a href="service-details.html"> Services </a>
-                        <ul class="submenu">
-                          <li><a href="service.html">Services</a></li>
-                          <li>
-                            <a href="service-details.html">Service Details</a>
-                          </li>
-                        </ul>
-                      </li>
-                      <li class="has-dropdown">
-                        <a href="news.html"> Pages </a>
-                        <ul class="submenu">
-                          <li class="has-dropdown">
-                            <a href="project-details.html"> Portfolio </a>
-                            <ul class="submenu">
-                              <li><a href="project.html">Portfolio 01</a></li>
-                              <li><a href="project-2.html">Portfolio 02</a></li>
-                              <li>
-                                <a href="project-details.html"
-                                  >Project Details</a
-                                >
-                              </li>
-                            </ul>
-                          </li>
-                          <li class="has-dropdown">
-                            <a href="car-details.html"> Vehicles </a>
-                            <ul class="submenu">
-                              <li><a href="car.html">Vehicles</a></li>
-                              <li>
-                                <a href="car-details.html">Vehicles Details</a>
-                              </li>
-                            </ul>
-                          </li>
-                          <li class="has-dropdown">
-                            <a href="car-details.html">User Dashboard</a>
-                            <ul class="submenu">
-                              <li>
-                                <a href="user-dashboard.html">Dashboard</a>
-                              </li>
-                              <li>
-                                <a href="order-history.html">Order History</a>
-                              </li>
-                              <li>
-                                <a href="order-details.html">Order Details</a>
-                              </li>
-                              <li><a href="settings.html">Settings</a></li>
-                            </ul>
-                          </li>
-                          <li><a href="faq.html">Faq's</a></li>
-<li><a href="contact.html">Contact Us</a></li>
-
-@guest
-    <!-- Guest users see Login/Register -->
-    <li><a href="{{ route('login') }}">Log In</a></li>
-    <li><a href="{{ route('register') }}">Register</a></li>
-@else
-    <!-- Logged-in users see Profile/Logout -->
-    <li><a href="{{ route('profile.edit') }}">My Profile</a></li>
-    <li>
-        <form method="POST" action="{{ route('logout') }}">
-            @csrf
-            <button type="submit" style="background: none; border: none; color: inherit; cursor: pointer;">
-                Logout
-            </button>
-        </form>
-    </li>
-@endguest
-
-<li><a href="404.html">404 Page</a></li>
-
-                        </ul>
-                      </li>
-                      
-                     
-                    </ul>
-                  </nav>
-                </div>
-              </div>
-
-              <!-- user options -->
-              <div class="navbar-2-user-options">
-                <div class="search-wrapper d-none d-md-block">
-                  <form>
-                    <div class="position-relative">
-                      <input
-                        type="search"
-                        class="form-control search-input"
-                        placeholder="Search..."
-                        aria-label="Search"
-                      />
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="16"
-                        height="16"
-                        fill="currentColor"
-                        class="bi bi-search search-icon"
-                        viewBox="0 0 16 16"
-                      >
-                        <path
-                          d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"
-                        />
-                      </svg>
+            <div class="col-6 col-md-4">
+                <div class="navbar-2-left">
+                    <div class="navbar-2-logo">
+                        <a href="{{ url('/home') }}">
+                            <img src="assets/img/logo/black-logo.svg" alt="fixmyride" />
+                        </a>
                     </div>
-                  </form>
                 </div>
-
-                
-              </div>
-              @guest
-    <!-- Guest users see Login/Register -->
-    <li><a href="{{ route('login') }}">Log In</a></li>
-    <li><a href="{{ route('register') }}">Register</a></li>
-@else
-    <!-- Logged-in users see role-specific links -->
-    @if(Auth::user()->role === 'mechanic')
-        <li><a href="{{ route('mechanic.dashboard') }}">My Dashboard</a></li>
-        <li><a href="{{ route('mechanic.jobs') }}">View Job Requests</a></li>
-    @elseif(Auth::user()->role === 'customer')
-        <li><a href="{{ route('customer.jobs') }}">My Requests</a></li>
-    @endif
-    
-    <li><a href="{{ route('profile.edit') }}">My Profile</a></li>
-    <li>
-        <form method="POST" action="{{ route('logout') }}">
-            @csrf
-            <button type="submit" style="background: none; border: none; color: inherit; cursor: pointer;">
-                Logout
-            </button>
-        </form>
-    </li>
-@endguest
             </div>
-          </div>
+            <div class="col-6 col-md-8">
+                <div class="navbar-2-right">
+                    <!-- Main Menu -->
+                    <div class="mean__menu-wrapper">
+                        <div class="main-menu">
+                            <nav id="mobile-menu">
+                                <ul>
+                                    <!-- Home -->
+                                    <li>
+                                        <a href="{{ url('/home') }}">Home</a>
+                                    </li>
+                                    
+                                    <!-- About (Scroll to section) -->
+                                    <li>
+                                        <a href="#about-section">About</a>
+                                    </li>
+                                    
+                                    <!-- Services (Scroll to section) -->
+                                    <li>
+                                        <a href="#services-section">Services</a>
+                                    </li>
+                                    
+                                    <!-- Find Mechanics (Scroll to map) -->
+                                    <li>
+                                        <a href="#map">Find Mechanics</a>
+                                    </li>
+                                    
+                                    <!-- Contact -->
+                                    <li>
+                                        <a href="#contact-section">Contact</a>
+                                    </li>
+
+                                    <!-- Auth Links (Mobile & Desktop) -->
+                                    @guest
+                                        <li class="d-xl-none"><a href="{{ route('login') }}">Log In</a></li>
+                                        <li class="d-xl-none"><a href="{{ route('register') }}">Register</a></li>
+                                    @else
+                                        <li class="d-xl-none"><a href="{{ route('profile.edit') }}">My Profile</a></li>
+                                        @if(Auth::user()->role === 'mechanic')
+                                            <li class="d-xl-none"><a href="{{ route('mechanic.dashboard') }}">Dashboard</a></li>
+                                        @endif
+                                        <li class="d-xl-none">
+                                            <form method="POST" action="{{ route('logout') }}">
+                                                @csrf
+                                                <button type="submit" style="background: none; border: none; color: inherit; cursor: pointer; padding: 10px 0; width: 100%; text-align: left;">
+                                                    Logout
+                                                </button>
+                                            </form>
+                                        </li>
+                                    @endguest
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+
+                    <!-- Desktop User Options & Auth Buttons -->
+                    <div class="navbar-2-user-options">
+                        <!-- Search (Optional - can remove if not needed) -->
+                        <div class="search-wrapper d-none d-lg-block">
+                            <form>
+                                <div class="position-relative">
+                                    <input
+                                        type="search"
+                                        class="form-control search-input"
+                                        placeholder="Search..."
+                                        aria-label="Search"
+                                        style="width: 200px; padding: 8px 35px 8px 15px; border-radius: 25px;"
+                                    />
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        width="16"
+                                        height="16"
+                                        fill="currentColor"
+                                        class="bi bi-search search-icon"
+                                        viewBox="0 0 16 16"
+                                        style="position: absolute; right: 12px; top: 50%; transform: translateY(-50%);"
+                                    >
+                                        <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+                                    </svg>
+                                </div>
+                            </form>
+                        </div>
+
+                        <!-- Auth Buttons (Desktop Only) -->
+                        <div class="auth-buttons d-none d-xl-flex align-items-center gap-2 ms-3">
+                            @guest
+                                <a href="{{ route('login') }}" class="btn btn-outline-primary btn-sm px-3 py-2" style="border-radius: 25px; font-weight: 600;">
+                                    Log In
+                                </a>
+                                <a href="{{ route('register') }}" class="btn btn-primary btn-sm px-3 py-2" style="border-radius: 25px; font-weight: 600; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border: none;">
+                                    Register
+                                </a>
+                            @else
+                                <div class="dropdown">
+                                    <button class="btn btn-outline-dark btn-sm dropdown-toggle px-3 py-2" type="button" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false" style="border-radius: 25px; font-weight: 600;">
+                                        <i class="fa-solid fa-user-circle"></i> {{ Auth::user()->name }}
+                                    </button>
+                                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+                                        <li><a class="dropdown-item" href="{{ route('profile.edit') }}">
+                                            <i class="fa-solid fa-user"></i> My Profile
+                                        </a></li>
+                                        @if(Auth::user()->role === 'mechanic')
+                                            <li><a class="dropdown-item" href="{{ route('mechanic.dashboard') }}">
+                                                <i class="fa-solid fa-dashboard"></i> Dashboard
+                                            </a></li>
+                                        @endif
+                                        <li><hr class="dropdown-divider"></li>
+                                        <li>
+                                            <form method="POST" action="{{ route('logout') }}">
+                                                @csrf
+                                                <button type="submit" class="dropdown-item text-danger">
+                                                    <i class="fa-solid fa-sign-out-alt"></i> Logout
+                                                </button>
+                                            </form>
+                                        </li>
+                                    </ul>
+                                </div>
+                            @endguest
+                        </div>
+
+                        <!-- Mobile Menu Toggle -->
+                        <div class="header__hamburger d-xl-none my-auto ms-2">
+                            <div class="sidebar__toggle">
+                                <i class="fas fa-bars"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
-    </header>
+    </div>
+</header>
 
     <!-- Hero Section Start -->
     <section
@@ -693,10 +655,10 @@
 
      <!-- class="hero-section hero-1 bg-cover"
       style="background-image: url('assets/img/hero/hero-bg.jpg')"
-    >-->
+    >
       <div class="swiper-dot">
         <div class="dot"></div>
-      </div>
+      </div>-->
       <div class="container">
         <div class="swiper hero-slider">
     <div class="swiper-wrapper">
@@ -744,7 +706,7 @@
                             Our Emergency SOS feature connects you with the nearest available mechanic instantly. Get help when you need it most—24/7 support.
                         </p>
                         <div class="hero-button animate__animated animate__fadeInUp animate__delay-2s">
-                            <a href="#map" class="theme-btn" style="background: #ff0844;">
+                            <a href="#map" class="theme-btn" style="background: #ed3737;">
                                 Emergency SOS
                                 <i class="fa-solid fa-triangle-exclamation"></i>
                             </a>
@@ -753,7 +715,7 @@
                 </div>
                 <div class="col-lg-6">
                     <div class="hero-image-items animate__animated animate__fadeInRight">
-                        <img src="assets/img/hero/hero-car-1.png" alt="Emergency SOS" style="max-width: 100%; height: auto; filter: drop-shadow(0 10px 30px rgba(255,8,68,0.5));"/>
+                        <img src="assets/img/hero/hero-car-2.png" alt="Emergency SOS" style="max-width: 100%; height: auto; filter: drop-shadow(0 10px 30px rgba(255, 255, 255, 0.5));"/>
                     </div>
                 </div>
             </div>
@@ -782,7 +744,7 @@
                 </div>
                 <div class="col-lg-6">
                     <div class="hero-image-items animate__animated animate__fadeInRight">
-                        <img src="assets/img/hero/hero-car-1.png" alt="Spare Parts" style="max-width: 100%; height: auto;"/>
+                        <img src="assets/img/hero/hero-car-3.png" alt="Spare Parts" style="max-width: 100%; height: auto;"/>
                     </div>
                 </div>
             </div>
@@ -790,16 +752,16 @@
         
     </div>
     
-    <!-- Add Pagination & Navigation -->
+    <!-- Add Pagination & Navigation 
     <div class="swiper-pagination"></div>
     <div class="swiper-button-next"></div>
-    <div class="swiper-button-prev"></div>
+    <div class="swiper-button-prev"></div>-->
 </div>
       </div>
     </section>
 
     <!-- About Section Start -->
-    <section class="about-section fix section-padding">
+    <section id="about-section" class="about-section fix section-padding">
       <div class="shape-img float-bob-x">
         <img src="assets/img/about/taiyer.png" alt="img" />
       </div>
@@ -1248,7 +1210,7 @@
     </section>
 
     <!-- Feature Section Start -->
-    <section class="feature-section fix section-padding">
+    <section id="services-section" class="feature-section fix section-padding">
       <div class="container">
         <div class="row g-4">
           <div
@@ -2026,7 +1988,7 @@ function selectMechanic(mechanicId) {
 
 
     <!-- Footer section started -->
-    <footer class="footer-3">
+    <footer id="contact-section" class="footer-3">
       <!-- contact info -->
       <div class="container">
         <div class="row">
@@ -2423,6 +2385,43 @@ function selectMechanic(mechanicId) {
         }
     }, 1000);
 </script>
-
+<script>
+// Smooth scrolling for navigation links
+document.addEventListener('DOMContentLoaded', function() {
+    // Get all navigation links that start with #
+    const navLinks = document.querySelectorAll('a[href^="#"]');
+    
+    navLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+            const href = this.getAttribute('href');
+            
+            // Check if it's a section link (not just #)
+            if (href && href.length > 1) {
+                e.preventDefault();
+                
+                const targetId = href.substring(1);
+                const targetSection = document.getElementById(targetId);
+                
+                if (targetSection) {
+                    // Close mobile menu if open
+                    const mobileMenu = document.querySelector('.mean__menu-wrapper');
+                    if (mobileMenu && mobileMenu.classList.contains('mean-container')) {
+                        document.querySelector('.meanmenu-reveal').click();
+                    }
+                    
+                    // Smooth scroll to section
+                    const headerHeight = document.getElementById('header-sticky')?.offsetHeight || 80;
+                    const targetPosition = targetSection.offsetTop - headerHeight;
+                    
+                    window.scrollTo({
+                        top: targetPosition,
+                        behavior: 'smooth'
+                    });
+                }
+            }
+        });
+    });
+});
+</script>
   </body>
 </html>

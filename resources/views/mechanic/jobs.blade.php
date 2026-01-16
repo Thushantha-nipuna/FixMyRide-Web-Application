@@ -5,10 +5,152 @@
         </h2>
     </x-slot>
 
+    <style>
+        /* Button visibility improvements */
+        .btn-action {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            border: none;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .btn-action:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-accept {
+            background-color: #10b981;
+            color: white;
+        }
+
+        .btn-accept:hover {
+            background-color: #059669;
+        }
+
+        .btn-decline {
+            background-color: #ef4444;
+            color: white;
+        }
+
+        .btn-decline:hover {
+            background-color: #dc2626;
+        }
+
+        .btn-start {
+            background-color: #3b82f6;
+            color: white;
+        }
+
+        .btn-start:hover {
+            background-color: #2563eb;
+        }
+
+        .btn-complete {
+            background-color: #8b5cf6;
+            color: white;
+        }
+
+        .btn-complete:hover {
+            background-color: #7c3aed;
+        }
+
+        .btn-contact {
+            background-color: #6b7280;
+            color: white;
+        }
+
+        .btn-contact:hover {
+            background-color: #4b5563;
+        }
+
+        .btn-back {
+            color: #3b82f6;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: color 0.2s ease;
+        }
+
+        .btn-back:hover {
+            color: #2563eb;
+            text-decoration: underline;
+        }
+
+        /* Job card improvements */
+        .job-card {
+            border: 2px solid #e5e7eb;
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            background: white;
+            transition: all 0.3s ease;
+        }
+
+        .job-card.pending {
+            border-color: #fbbf24;
+            background-color: #fffbeb;
+        }
+
+        .job-card:hover {
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.5rem 1rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+            font-weight: 600;
+        }
+
+        .new-request {
+            color: #ef4444;
+            font-weight: 700;
+            animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: .5;
+            }
+        }
+
+        .button-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            margin-top: 1.5rem;
+        }
+
+        @media (max-width: 640px) {
+            .button-group {
+                flex-direction: column;
+            }
+            
+            .btn-action {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+    </style>
+
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="mb-4">
-                <a href="{{ route('mechanic.dashboard') }}" class="text-blue-500 hover:underline">
+                <a href="{{ route('mechanic.dashboard') }}" class="btn-back">
                     ← Back to Dashboard
                 </a>
             </div>
@@ -22,21 +164,21 @@
                     @else
                         <div class="space-y-4">
                             @foreach($jobs as $job)
-                                <div class="border rounded-lg p-6 {{ $job->status === 'pending' ? 'border-yellow-400 bg-yellow-50' : 'border-gray-200' }}">
+                                <div class="job-card {{ $job->status === 'pending' ? 'pending' : '' }}">
                                     <div class="flex justify-between items-start">
                                         <div class="flex-1">
                                             <div class="flex items-center gap-3 mb-3">
-                                                <span class="px-3 py-1 rounded-full text-sm font-semibold
+                                                <span class="status-badge
                                                     @if($job->status === 'pending') bg-yellow-200 text-yellow-800
                                                     @elseif($job->status === 'accepted') bg-blue-200 text-blue-800
                                                     @elseif($job->status === 'in_progress') bg-purple-200 text-purple-800
                                                     @elseif($job->status === 'completed') bg-green-200 text-green-800
                                                     @else bg-gray-200 text-gray-800
                                                     @endif">
-                                                    {{ ucfirst($job->status) }}
+                                                    {{ ucfirst(str_replace('_', ' ', $job->status)) }}
                                                 </span>
                                                 @if($job->status === 'pending')
-                                                    <span class="text-red-500 font-bold animate-pulse">🚨 NEW REQUEST</span>
+                                                    <span class="new-request">🚨 NEW REQUEST</span>
                                                 @endif
                                             </div>
 
@@ -55,7 +197,7 @@
                                                     <p><strong><i class="fa-solid fa-location-dot"></i> Location:</strong> 
                                                         <a href="https://www.google.com/maps?q={{ $job->customer_latitude }},{{ $job->customer_longitude }}" 
                                                            target="_blank" 
-                                                           class="text-blue-500 hover:underline">
+                                                           class="text-blue-500 hover:underline font-semibold">
                                                             View on Map
                                                         </a>
                                                     </p>
@@ -75,30 +217,30 @@
                                     </div>
 
                                     <!-- Action Buttons -->
-                                    <div class="mt-4 flex gap-2">
+                                    <div class="button-group">
                                         @if($job->status === 'pending')
                                             <button onclick="updateJobStatus({{ $job->id }}, 'accepted')" 
-                                                    class="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600">
+                                                    class="btn-action btn-accept">
                                                 <i class="fa-solid fa-check"></i> Accept Job
                                             </button>
                                             <button onclick="updateJobStatus({{ $job->id }}, 'cancelled')" 
-                                                    class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600">
+                                                    class="btn-action btn-decline">
                                                 <i class="fa-solid fa-times"></i> Decline
                                             </button>
                                         @elseif($job->status === 'accepted')
                                             <button onclick="updateJobStatus({{ $job->id }}, 'in_progress')" 
-                                                    class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
+                                                    class="btn-action btn-start">
                                                 <i class="fa-solid fa-tools"></i> Start Work
                                             </button>
                                         @elseif($job->status === 'in_progress')
                                             <button onclick="updateJobStatus({{ $job->id }}, 'completed')" 
-                                                    class="bg-purple-500 text-white px-4 py-2 rounded hover:bg-purple-600">
+                                                    class="btn-action btn-complete">
                                                 <i class="fa-solid fa-flag-checkered"></i> Mark Complete
                                             </button>
                                         @endif
 
                                         <a href="tel:{{ $job->customer->email }}" 
-                                           class="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600">
+                                           class="btn-action btn-contact">
                                             <i class="fa-solid fa-phone"></i> Contact Customer
                                         </a>
                                     </div>

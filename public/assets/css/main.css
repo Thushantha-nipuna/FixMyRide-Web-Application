@@ -992,6 +992,57 @@ span {
     gap: 10px;
   }
 }
+.auth-buttons {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.auth-buttons .btn {
+    white-space: nowrap;
+    font-size: 14px;
+}
+
+/* Mobile Menu Improvements */
+@media (max-width: 1199px) {
+    .navbar-2-user-options {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+    
+    .header__hamburger {
+        margin-left: 10px !important;
+    }
+}
+
+/* Dropdown styling */
+.dropdown-menu {
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    border: none;
+    margin-top: 10px;
+}
+
+.dropdown-item {
+    padding: 10px 20px;
+    transition: all 0.3s ease;
+}
+
+.dropdown-item:hover {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+}
+
+.dropdown-item i {
+    width: 20px;
+    margin-right: 8px;
+}
+
+/* Smooth scroll behavior */
+html {
+    scroll-behavior: smooth;
+}
 .login-wrapper .signin-item .social-icon a {
   border-radius: 15px;
   border: 1px solid rgba(207, 208, 212, 0.2);
